@@ -5,6 +5,6 @@ input[type="radio"]{
       color: brown;
       align-self: center;
   }
-  /* .hide{
+  .hide{
     display:none;
- } */
+ }
