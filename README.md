@@ -1,2 +1,0 @@
-# customerUI
-customer UI component
