@@ -1,0 +1,10 @@
+input[type="radio"]{
+    margin: 0 10px 0 10px;
+  }
+  h1 {
+      color: brown;
+      align-self: center;
+  }
+  /* .hide{
+    display:none;
+ } */
