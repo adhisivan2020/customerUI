@@ -65,7 +65,7 @@ export class AppComponent {
   };
   if(this.selectedLink=="add"){
     const data = JSON.stringify(this.customerdetails);
-    this.httpClient.post('http://13.232.8.125:8080/api/customer/add',data,requestOptions
+    this.httpClient.post('http://13.232.8.125:8080/api/customers',data,requestOptions
    
     ).subscribe(
       (data:any) => {
