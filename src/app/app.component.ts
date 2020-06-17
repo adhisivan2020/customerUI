@@ -5,17 +5,53 @@ import { HttpClient} from '@angular/common/http' ;
 import { HttpHeaders} from '@angular/common/http' ;
 import { Observable } from 'rxjs' ;
 import { HttpRequest } from '@angular/common/http';
+import  { customerdetails } from './customerdetails'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+@Injectable()
 export class AppComponent {
   title = 'CustomerInformation';
-  
+   _cusDetails : customerdetails[]=[];
+   isDataPopulate=false;
+   updateCustomerDetails(){
+     this.isDataPopulate=true;
+   }
   //constructor(private _customerService:CustomerService){}
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient) {
+    this.httpClient.get('http://13.232.8.125:8080/api/customers'
+    ).subscribe(
+      (res:customerdetails[]) => {
+        this._cusDetails=res;
+      }
+    )
+   }
+  retrieveDataFromCusInfo(){
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': "Content-Type"
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict), 
+    };
+      const data = JSON.stringify(this.customerdetails);
+      this.httpClient.get('http://13.232.8.125:8080/api/customers',requestOptions
+      ).subscribe(
+        (data:any) => {
+          console.log('get call');
+        }
+      )
+    
+  }
+  getCustomerDetails(): Observable<customerdetails[]> {
+    return this.httpClient.get<customerdetails[]>('http://13.232.8.125:8080/api/customers')
+   
+  }
   isDataSubmitted = false;
   radioDetailsupdate='';
   customerdetails = {
@@ -101,7 +137,8 @@ this.httpClient.request(newReq).subscribe((res) => {
   
     
   this.isDataSubmitted=true;
-  
+  this.isDataPopulate=false;
+  location.reload();
   }
 
   resetForm() {

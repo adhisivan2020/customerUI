@@ -1,6 +1,34 @@
-<h1>Customer Information Details</h1>
 
-<form [class.hide]="isDataSubmitted" onsubmit="return false">
+
+<div [class.hide]="isDataPopulate" class="container">
+    <table class="table table-trapped">
+      <thead>
+        <td></td><td></td>
+        <td><h1>Customer Information Details</h1></td>
+      </thead> 
+       <thead>
+           <tr>
+             <th>Name</th>
+             <th>Address</th>
+             <th>Phone</th>
+             <th>Active</th>
+           </tr>
+       </thead>
+
+       <tbody>
+         <tr *ngFor="let data of _cusDetails">
+            <td>{{ data.name }}</td>
+            <td>{{ data.address }}</td>
+            <td>{{ data.phone }}</td>
+            <td>{{ data.active }}</td>
+         </tr>
+       </tbody>
+
+    </table>
+    <button (click)="updateCustomerDetails()" class="btn btn-primary">Add Customer Details</button>
+</div>
+
+<form [class.hide]="!isDataPopulate" onsubmit="return false">
   <div class="form-row">
     <div class="form-group col-md-3">
       <label for="inputEmail4">Name</label>
@@ -43,14 +71,14 @@
         </label>
     </div>  
   </div>
-  <button (click)="onSubmit()" type="submit" class="btn btn-primary">Update Details</button>
+  <button (click)="onSubmit()" type="submit" class="btn btn-primary">{{ selectedLink }} Details</button>
 </form>
 
-<form [class.hide]="!isDataSubmitted">
+<!--<form [class.hide]="!isDataSubmitted">
     <p>Thanks for {{ selectedLink }} operation</p>
     <hr>
     <p>Name: {{ customerdetails.name }}</p>
     <p>Phone: {{ customerdetails.phone }}</p>
   
     <button (click)="resetForm()" class="btn btn-primary">Submit another details</button>
-</form>
+</form>-->
